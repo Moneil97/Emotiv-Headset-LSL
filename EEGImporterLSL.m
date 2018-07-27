@@ -1,38 +1,28 @@
 classdef EEGImporterLSL < matlab.System
-    % Untitled Add summary here
-    %
-    % This template includes the minimum set of functions required
-    % to define a System object with discrete state.
-    
-    % Public, tunable properties
-    properties
-        
-    end
-    
-    properties (Hidden)%(DiscreteState)
-        
-    end
-    
-    % Pre-computed constants
-    properties(Access = private)
-        
-    end
+    % Gets 18 EEG Channels from Lab Streaming Layer
     
     methods(Access = protected)
-        function setupImpl(obj)
+        function setupImpl(~)
+            coder.extrinsic('evalin')
+            coder.extrinsic('assignin')
+            assignin('base', 'lib', evalin('base', 'lsl_loadlib()'));
 
+            %Wait for an available EEG Stream, then get all EEG Streams
+            while isempty(evalin('base', "lsl_resolve_byprop(lib,'type','EEG')"))
+            end
+            assignin('base', 'result', evalin('base', "lsl_resolve_byprop(lib,'type','EEG')"));
+            
+            %Create inlet on first available EEG Stream
+            assignin('base', 'inlet', evalin('base', "lsl_inlet(result{1})"));
         end
         
-        function y = stepImpl(obj)
-            
+        function y = stepImpl(~)
             coder.extrinsic('evalin');
             y = zeros(18,1);
             y = evalin('base', 'transpose(inlet.pull_sample())');
-
         end
         
-        function resetImpl(obj)
-            % Initialize / reset discrete-state properties
+        function resetImpl(~)
         end
     end
 end
