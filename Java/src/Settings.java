@@ -1,4 +1,3 @@
-package emotiv;
 import java.util.HashMap;
 
 //! Set headset setting for EPOC+ headset

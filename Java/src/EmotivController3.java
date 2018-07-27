@@ -1,4 +1,3 @@
-package emotiv;
 import java.util.ArrayList;
 import java.util.List;
 
