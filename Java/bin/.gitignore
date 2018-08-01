@@ -1,13 +1,10 @@
-/javadoc/
 /.classpath
 /.project
 /com/
 /edu/
-/examples/
 /liblsl32.dll
 /liblsl32.dylib
+/liblsl32.so
 /liblsl64.dll
 /liblsl64.dylib
 /liblsl64.so
-/readme.txt
-/liblsl32.so

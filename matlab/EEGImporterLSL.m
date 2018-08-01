@@ -5,7 +5,9 @@ classdef EEGImporterLSL < matlab.System
         function setupImpl(~)
             coder.extrinsic('evalin')
             coder.extrinsic('assignin')
-            assignin('base', 'lib', evalin('base', 'lsl_loadlib()'));
+            
+            evalin('base', "addpath(genpath(pwd))") %Recursively add current dir to path
+            assignin('base', 'lib', evalin('base', 'lsl_loadlib()')); %load lsl
 
             %Wait for an available EEG Stream, then get all EEG Streams
             while isempty(evalin('base', "lsl_resolve_byprop(lib,'type','EEG')"))
@@ -18,8 +20,8 @@ classdef EEGImporterLSL < matlab.System
         
         function y = stepImpl(~)
             coder.extrinsic('evalin');
-            y = zeros(18,1);
-            y = evalin('base', 'transpose(inlet.pull_sample())');
+            y = zeros(18,1); %pre-allocate
+            y = evalin('base', 'transpose(inlet.pull_sample())'); %get [18,1] sample
         end
         
         function resetImpl(~)
