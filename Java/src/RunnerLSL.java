@@ -10,7 +10,7 @@ public class RunnerLSL {
 		
 		if (new File(libs).exists()) {
 			if (new File(libs + "\\edk.dll").exists())
-				Runtime.getRuntime().exec("java -Djava.library.path=\"" + libs + "\" -jar EEGImporter.jar");
+				Runtime.getRuntime().exec("java -Djava.library.path=\"" + libs + "\" -jar EEGImporterLSL.jar");
 			else
 				JOptionPane.showMessageDialog(null, "Could not find file in EmotivLibs: edk.dll");
 		}
