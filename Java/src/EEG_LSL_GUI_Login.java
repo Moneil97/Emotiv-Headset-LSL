@@ -96,7 +96,7 @@ public class EEG_LSL_GUI_Login extends JFrame {
 		JPanel panel_5 = new JPanel();
 		northPanel.add(panel_5);
 		
-		JLabel lblSimulinkEegImporter = new JLabel("Emotiv Simulink EEG Importer (UDP)");
+		JLabel lblSimulinkEegImporter = new JLabel("Emotiv Simulink EEG Importer (LSL)");
 		lblSimulinkEegImporter.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panel_5.add(lblSimulinkEegImporter);
 		
