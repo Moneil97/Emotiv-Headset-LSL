@@ -33,7 +33,7 @@ public class SendOverLSL {
 		        ec.startStateHandler();
 		        	
 				messagesTextArea.append("Creating new StreamInfo @ " + frequency + "Hz...\n");
-		        LSL.StreamInfo info = new LSL.StreamInfo("Emotiv","EEG",channels, frequency, LSL.ChannelFormat.double64,"emotivHeadset1");
+		        LSL.StreamInfo info = new LSL.StreamInfo("Emotiv","EEG",channels, frequency, LSL.ChannelFormat.float32,"emotivHeadset1");
 
 		        messagesTextArea.append("Creating an outlet...\n");
 		        LSL.StreamOutlet outlet = new LSL.StreamOutlet(info);
@@ -42,8 +42,9 @@ public class SendOverLSL {
 				int lastClock = -1;
 		        while (true) {
 					List<double[]> samples = ec.getAvailableSamples(true);
+					
 					if (samples != null) {
-						
+						System.out.println(samples.size());
 						for (int s = 0; s < samples.size();  s++) {
 							double[] sample = samples.get(s);
 							//System.out.println(Arrays.toString(sample));
